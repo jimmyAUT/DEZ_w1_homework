@@ -1,0 +1,29 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: 'w1'
+      POSTGRES_PASSWORD: 'w1'
+      POSTGRES_DB: 'ny_taxi'
+    ports:
+      - '5433:5432'
+    volumes:
+      - w1-homework-vol-pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@pgadmin.com"
+      PGADMIN_DEFAULT_PASSWORD: "pgadmin"
+    ports:
+      - "8080:80"
+    volumes:
+      - w1-homework-vol-pgadmin_data:/var/lib/pgadmin  
+
+volumes:
+  w1-homework-vol-pgdata:
+    name: w1-homework-vol-pgdata
+  w1-homework-vol-pgadmin_data:
+    name: w1-homework-vol-pgadmin_data
