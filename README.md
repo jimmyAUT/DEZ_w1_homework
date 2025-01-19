@@ -112,7 +112,7 @@ Q5: Which were the top pickup locations with over 13,000 in total_amount (across
 Consider only lpep_pickup_datetime when filtering by date.
     **Ans:East Harlem North, East Harlem South, Morningside Heights**
         ```sql
-        SELECT "PULocationID", z."Zone" ,SUM(t.total_amount)
+        SELECT t."PULocationID", z."Zone" ,SUM(t.total_amount)
         FROM "green_tripdata_2019-10" t
         JOIN "taxi_zone_lookup" z
         ON t."PULocationID" = z."LocationID"
@@ -120,4 +120,20 @@ Consider only lpep_pickup_datetime when filtering by date.
         GROUP BY t."PULocationID", z."Zone"
         HAVING SUM(t.total_amount) > 13000
         ```
-Q6:
+Q6: For the passengers picked up in October 2019 in the zone name "East Harlem North" which was the drop off zone that had the largest tip?
+    **Ans: JFK Airport**
+        ```sql
+        SELECT
+            pz."Zone" AS "pickup_zone",
+            dz."Zone" AS "dropoff_zone",
+            t.tip_amount
+        FROM "green_tripdata_2019-10" t
+        JOIN "taxi_zone_lookup" pz
+            ON t."PULocationID" = pz."LocationID"
+        JOIN "taxi_zone_lookup" dz
+            ON t."DOLocationID" = dz."LocationID"
+        WHERE DATE(t.lpep_pickup_datetime) BETWEEN '2019-10-01' AND '2019-10-31'
+            AND pz."Zone" = 'East Harlem North'
+        ORDER BY t.tip_amount DESC
+        LIMIT 1
+        ```
