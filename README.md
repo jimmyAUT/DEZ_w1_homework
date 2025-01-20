@@ -137,3 +137,9 @@ Q6: For the passengers picked up in October 2019 in the zone name "East Harlem N
         ORDER BY t.tip_amount DESC
         LIMIT 1
         ```
+
+Q7: Terraform Workflow
+
+1. Downloading the provider plugins and setting up backend - **terraform init**
+2. Generating proposed changes and auto-executing the plan - **terraform apply -auto-approve**
+3. Remove all resources managed by terraform - **terraform destroy**
