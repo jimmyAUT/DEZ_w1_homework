@@ -153,3 +153,36 @@ Q7: Terraform Workflow
 1. Downloading the provider plugins and setting up backend - **terraform init**
 2. Generating proposed changes and auto-executing the plan - **terraform apply -auto-approve**
 3. Remove all resources managed by terraform - **terraform destroy**
+
+## ETL pipeline script
+
+- Convert jupyter notebook to python script
+
+    ```bash
+    jupyter nbconvert --to=script taxi_data_ETL.ipynb
+    ```
+- Rename script file name
+
+    ```bash
+    mv taxi_data_ETL.py etl_script.py
+    ```
+
+- Use argparse to buile cli tool
+
+- Exeute the script with following command
+
+    ```bash
+    TRIP_URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz"
+    ZONE_URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_zone_lookup.csv"
+
+    python3 etl_script.py \
+        --user=w1 \
+        --password=w1 \
+        --host=localhost \
+        --port=5432 \
+        --db=ny_taxi \
+        --trip_table_name=taxi_tripdata_2019_10 \
+        --zone_table_name=zone_lookup
+        --trip_url=${TRIP_URL}
+        --zone_url=${zone_URL}
+    ```
