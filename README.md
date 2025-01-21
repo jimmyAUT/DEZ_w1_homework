@@ -179,10 +179,10 @@ Q7: Terraform Workflow
         --user=w1 \
         --password=w1 \
         --host=localhost \
-        --port=5432 \
+        --port=5433 \
         --db=ny_taxi \
         --trip_table_name=taxi_tripdata_2019_10 \
-        --zone_table_name=zone_lookup
-        --trip_url=${TRIP_URL}
-        --zone_url=${zone_URL}
+        --zone_table_name=zone_lookup \
+        --trip_url=${TRIP_URL} \
+        --zone_url=${ZONE_URL}
     ```

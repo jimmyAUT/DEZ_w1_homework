@@ -9,10 +9,6 @@ from time import time
 import os
 import argparse
 
-
-tripdata_URL = "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz"
-zone_URL = "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_zone_lookup.csv"
-
 def main(params):
     # Define variables
     user = params.user
@@ -40,7 +36,7 @@ def main(params):
     else:
         zone_file = f"{zone_file}.csv" 
 
-    os.system(f"wget {trip_url} -O {zone_file}")
+    os.system(f"wget {zone_url} -O {zone_file}")
     print(f"Downloaded {zone_file}")
 
 
